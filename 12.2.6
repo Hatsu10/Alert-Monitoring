@@ -1,0 +1,11 @@
+sudo apt install aide
+sudo nano /etc/aide/aide.conf 
+sudo aideinit
+
+
+.........................................................................................................
+With the lines we appended to the config file we configured AIDE to check the folder /etc for changes, so let's make a file change and check for it with AIDE. We'll start by checking for changes, and we'll see there are none - we've only just created the database. Then we'll make an inconsequential edit to the file /etc/pam.conf and then use AIDE to check for changes
+....................................................................................................................
+kali@kali:~$ sudo aide -c /etc/aide/aide.conf
+kali@kali:~$ echo -e "# New Comment\n$(cat /etc/pam.conf)" >> /etc/pam.conf
+kali@kali:~$ sudo aide -c /etc/aide/aide.conf
